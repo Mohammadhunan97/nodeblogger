@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+
+	<% errors.forEach((err) => { %>
+		<p class="err-msg"> <%= err %> </p>
+	<% }) %>
+
+	<h1>Sign Up:</h1>
+	<form action="/local/signup" method="post">
+		<input name="username" placeholder="username" />
+		<input type="password" name="password" placeholder="password" />
+		<input name="profile_pic" placeholder="your profile picture link" />
+		<input type="submit" />
+	</form>
+
+	<a href="/signup">Already have an account? Log In</a>
+	<script type="text/javascript" src="/script.js"></script>
+</body>
+</html>
