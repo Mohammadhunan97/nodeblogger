@@ -67,12 +67,43 @@ Router.get('/following/new/:username',(req,res) => {
 		console.log(err);
 		res.redirect('/');
 	})
-
-
 })
 
+
+Router.get('/following/remove/:username',(req,res) => {
+	let queryUserExists;
+	User.findOne({username: req.params.username}).then((user) => {
+		queryUserExists = user;
+		let index = user.followers.indexOf(req.session.user.username); //removes follower from their db
+		user.followers.splice(index,1);
+		user.save();
+	}).then(() => {
+		if(queryUserExists) {
+			User.findOne({ username: req.session.user.username }).then((user) => {
+				let index = user.followings.indexOf(req.params.username);
+				user.followings.splice(index,1);
+				user.save();
+				res.redirect('/dashboard');
+			})
+		}else{
+			res.redirect('/');
+		}
+	})
+})
 
 module.exports = Router;
 
 
-// /user/following/remove/tim1
+
+
+
+
+
+
+
+
+
+
+
+
+
