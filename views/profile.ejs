@@ -15,6 +15,12 @@
 	<br/>
 	<br/>
 
+
+	<% if(!queryUserIsSessionUser){ %>
+		<a href="/user/following/new/<%= user.username %>"> Follow this User</a>
+	<% } %>
+
+
 	<div class="user-container">
 		<h2> <%= user.username %> </h2>
 		<img src="<%= user.profile_pic %>" class="user-image"/>

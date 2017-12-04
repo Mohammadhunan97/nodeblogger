@@ -22,4 +22,9 @@ hr{
 .followers-container,.following-container{
     height: 150px;
     overflow: auto;
+    background-color: #eee;
+    margin: 10px 0px 10px 0px;
+}
+.usr-follower{
+    display: inline-block;
 }

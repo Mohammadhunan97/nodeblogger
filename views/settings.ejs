@@ -20,17 +20,25 @@
 		<img src="<%= user.profile_pic %>" class="user-image"/>
 
 		<br/>
-		<span class="followers-container">
-		<% user.followers.forEach((usr) =>{ %>
-			<p class="usr-follower"> <%= usr %> </p>
-		<% }) %>
-		</span>
+		<div class="followers-container">
+		<p>Users who follow you:</p>
 
-		<span class="following-container">
-		<% user.following.forEach((usr) =>{ %>
-			<p class="usr-follower"> <%= usr %> </p> <a href="/user/following/remove/<%= usr %>">Unfollow</a>
+		<% user.followers.forEach((usr) =>{ %>
+			<p class="usr-follower"> <a href="/user/profile/<%= usr %>"><%= usr %></a></p>
+			<br/>
 		<% }) %>
-		</span>
+		</div>
+
+		<div class="following-container">
+		<p>Users you are following:</p>
+		<% user.followings.forEach((usr) =>{ %>
+			<p class="usr-follower"><a href="/user/profile/<%= usr %>"><%= usr %></a></p> 
+			<button>
+				<a href="/user/following/remove/<%= usr %>">Unfollow</a>
+			</button>
+			<br/>
+		<% }) %>
+		</div>
 	</div>
 
 	<% posts.forEach((post) =>{ %>
@@ -38,6 +46,7 @@
 		<div class="post-container">
 			<h2 class="post-title"> <%= post.title %> </h2>
 			<a class="delete-post" href="/post/remove/5a24879de168717d0de87f0c">Delete this post</a>
+			<br/>
 			<img class="post-image" src="<%= post.image %>"  />
 			<br/>
 			<span class="tag-container">
