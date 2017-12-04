@@ -30,7 +30,24 @@ Router.get('/dashboard',(req,res) => {
 
 
 Router.get('/new_post/',(req,res) => {
-	res.render('new_post');
+	if(req.session.user){
+		res.render('new_post');
+	}else{
+		res.redirect('/');
+	}
+})
+
+
+Router.get('/search',(req,res) =>{
+	res.render('search',{posts: []});
+})
+
+
+Router.get('/search/:tag',(req,res) => {
+	Post.find({ tags: req.params.tag }).populate('original_poster','username').then((posts) => {
+		console.log(posts)
+		res.render('search',{posts,})
+	})
 })
 
 module.exports = Router;
