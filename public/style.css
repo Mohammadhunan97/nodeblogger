@@ -13,9 +13,13 @@ hr{
     padding: 5px;
     text-align: center;
 }
-.post-image{
+.post-image,.user-image{
 	width: 40vw;
 }
 .nav-item{
 	margin: 0px 5px 0px 5px;
+}
+.followers-container,.following-container{
+    height: 150px;
+    overflow: auto;
 }

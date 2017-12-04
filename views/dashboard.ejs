@@ -19,7 +19,7 @@
 	<hr/>
 		<div class="post-container">
 			<h2 class="post-title"> <%= post.title %> </h2>
-			<p class="post-author"> Created By <a href="/user/<%= post.original_poster.username %>"><%= post.original_poster.username %></a></p>
+			<p class="post-author"> Created By <a href="/user/profile/<%= post.original_poster.username %>"><%= post.original_poster.username %></a></p>
 			<img class="post-image" src="<%= post.image %>"  />
 			<br/>
 			<span class="tag-container">

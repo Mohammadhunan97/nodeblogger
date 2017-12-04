@@ -24,7 +24,7 @@ app.set('view engine','ejs');
 app.use('/',baseRoutes);
 app.use('/local',localRoutes);
 app.use('/post',postRoutes);
-
+app.use('/user',userRoutes);
 
 
 app.listen(port,(err) => {

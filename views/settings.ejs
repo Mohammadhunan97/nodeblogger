@@ -15,18 +15,29 @@
 	<br/>
 	<br/>
 
-	<input name="search" id="search-input" placeholder="search"> 
-	<button id="search-button">Search</button>
+	<div class="user-container">
+		<h2> <%= user.username %> </h2>
+		<img src="<%= user.profile_pic %>" class="user-image"/>
 
+		<br/>
+		<span class="followers-container">
+		<% user.followers.forEach((usr) =>{ %>
+			<p class="usr-follower"> <%= usr %> </p>
+		<% }) %>
+		</span>
 
-	<br/>
-	<br/>
-	<br/>
+		<span class="following-container">
+		<% user.following.forEach((usr) =>{ %>
+			<p class="usr-follower"> <%= usr %> </p> <a href="/user/following/remove/<%= usr %>">Unfollow</a>
+		<% }) %>
+		</span>
+	</div>
+
 	<% posts.forEach((post) =>{ %>
 	<hr/>
 		<div class="post-container">
 			<h2 class="post-title"> <%= post.title %> </h2>
-			<p class="post-author"> Created By <a href="/user/profile/<%= post.original_poster.username %>"><%= post.original_poster.username %></a></p>
+			<a class="delete-post" href="/post/remove/5a24879de168717d0de87f0c">Delete this post</a>
 			<img class="post-image" src="<%= post.image %>"  />
 			<br/>
 			<span class="tag-container">
@@ -38,10 +49,6 @@
 	<% }) %>
 
 	<script type="text/javascript" src="/script.js"></script>
-	<script>
-		document.getElementById('search-button').addEventListener('click',function(){
-			window.location.href = "/search/" + document.getElementById('search-input').value;
-		})
-	</script>
 </body>
 </html>
+

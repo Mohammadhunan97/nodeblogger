@@ -15,18 +15,16 @@
 	<br/>
 	<br/>
 
-	<input name="search" id="search-input" placeholder="search"> 
-	<button id="search-button">Search</button>
+	<div class="user-container">
+		<h2> <%= user.username %> </h2>
+		<img src="<%= user.profile_pic %>" class="user-image"/>
+		<br/>
+	</div>
 
-
-	<br/>
-	<br/>
-	<br/>
 	<% posts.forEach((post) =>{ %>
 	<hr/>
 		<div class="post-container">
 			<h2 class="post-title"> <%= post.title %> </h2>
-			<p class="post-author"> Created By <a href="/user/profile/<%= post.original_poster.username %>"><%= post.original_poster.username %></a></p>
 			<img class="post-image" src="<%= post.image %>"  />
 			<br/>
 			<span class="tag-container">
@@ -38,10 +36,6 @@
 	<% }) %>
 
 	<script type="text/javascript" src="/script.js"></script>
-	<script>
-		document.getElementById('search-button').addEventListener('click',function(){
-			window.location.href = "/search/" + document.getElementById('search-input').value;
-		})
-	</script>
 </body>
 </html>
+
