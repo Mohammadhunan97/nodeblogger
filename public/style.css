@@ -1,7 +1,21 @@
+body{
+	text-align: center;
+    width: 90vw;
+    margin-left: 5vw;
+}
+hr{
+	width: 80vw;
+}
 .err-msg{
 	background-color: #e74c3c;
     color: white;
     border: 2px solid #e74c3c;
     padding: 5px;
     text-align: center;
+}
+.post-image{
+	width: 40vw;
+}
+.nav-item{
+	margin: 0px 5px 0px 5px;
 }

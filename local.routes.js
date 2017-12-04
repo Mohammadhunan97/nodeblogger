@@ -12,13 +12,11 @@ Router.post('/login',(req,res) => {
 		let userExists = user;
 		if(userExists && (bcrypt.compareSync(req.body.password, user.password) === true)){
 			req.session.user = user;
-	 		res.redirect('/');
+	 		res.redirect('/dashboard');
 		}else{
 			errors.push('could not log in');
 			res.render('login',{errors,})
 		}
-
-		console.log('c')
 	}).catch((err) => {
 		errors.push('user does not exist');
 		res.render('login',{errors,});
@@ -55,9 +53,10 @@ Router.post('/signup',(req,res) => {
 			newuser.followers.push(req.body.username);
 			newuser.followings.push(req.body.username);
 
-			newuser.save();
-
-			res.send('logged in, create session')
+			newuser.save((user) =>{
+				req.session.user = user;
+				res.redirect('/dashboard');
+			});
 		}
 	})
 

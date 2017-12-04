@@ -1,14 +1,36 @@
 /* 
 	localhost:3000/<Route>
 */
-const Router = require('express').Router();
+const Router = require('express').Router(),
+	Post 	 = require('./model/post.model');
 
 Router.get('/',(req,res) => {
-	res.render('login', {errors: []})
+	if(req.session.user) {
+		res.redirect('/dashboard');
+	}else{
+		res.render('login', {errors: []});
+	}
 })
 
 Router.get('/signup',(req,res) => {
 	res.render('signup', {errors: []})
+})
+
+
+Router.get('/dashboard',(req,res) => {
+	if(req.session.user){
+		Post.find({original_poster: req.session.user._id }).populate('original_poster','username').then((posts)=>{
+			console.log(posts)
+			res.render('dashboard',{posts,})
+		});
+	}else{
+		res.redirect('/');
+	}
+})
+
+
+Router.get('/new_post/',(req,res) => {
+	res.render('new_post');
 })
 
 module.exports = Router;

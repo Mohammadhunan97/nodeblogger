@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+	<a href="/new_post/" class="nav-item">Make a New Post</a>
+	<a href="/dashboard/" class="nav-item">Dashboard</a>
+	<a href="/search/" class="nav-item">Search</a>
+	<a href="/user/profile/" class="nav-item">Profile</a>
+	<a href="/user/settings/" class="nav-item">Settings</a>
+
+
+	<h1>Dashboard</h1>
+
+
+	<% posts.forEach((post) =>{ %>
+	<hr/>
+		<div class="post-container">
+			<h2 class="post-title"> <%= post.title %> </h2>
+			<p class="post-author"> Created By <a href="/user/<%= post.original_poster.username %>"><%= post.original_poster.username %></a></p>
+			<img class="post-image" src="<%= post.image %>"  />
+			<br/>
+			<span class="tag-container">
+				<% post.tags.forEach((tag) => { %>
+					<a class="post-tag" href="/search/<%= tag %>"><%= tag %></a>
+				<% }) %>
+			</span>
+		</div>
+	<% }) %>
+
+
+	<script type="text/javascript" src="/script.js"></script>
+</body>
+</html>
+

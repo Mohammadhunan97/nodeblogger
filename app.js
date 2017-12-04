@@ -6,6 +6,7 @@ const express 	= require('express'),
 	baseRoutes	= require('./base.routes'),
 	userRoutes  = require('./user.routes'),
 	localRoutes = require('./local.routes'),
+	postRoutes	= require('./post.routes'),
 	key			= require('./key'),
 	app 		= express(),
 	db 			= 'mongodb://localhost/computing1',
@@ -22,6 +23,7 @@ app.use(express.static('public'));
 app.set('view engine','ejs');
 app.use('/',baseRoutes);
 app.use('/local',localRoutes);
+app.use('/post',postRoutes);
 
 
 
@@ -32,3 +34,5 @@ app.listen(port,(err) => {
 		console.log('listening at http://localhost:' + port);
 	}
 })
+
+
