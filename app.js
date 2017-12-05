@@ -9,11 +9,11 @@ const express 	= require('express'),
 	postRoutes	= require('./post.routes'),
 	key			= require('./key'),
 	app 		= express(),
-	db 			= 'mongodb://localhost/computing1',
+	db 			= 'mongodb://localhost/computing4',
 	port		= 3000;
 
 
-mongoose.connect('localhost','computing2');
+mongoose.connect('localhost','computing4');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: true

@@ -45,10 +45,12 @@
 	<hr/>
 		<div class="post-container">
 			<h2 class="post-title"> <%= post.title %> </h2>
-			<a class="delete-post" href="/post/remove/5a24879de168717d0de87f0c">Delete this post</a>
+			<a class="delete-post" href="/post/remove/<%= post._id %>">Delete this post</a>
+			<a class="update-post" href="/post/remove/<%= post._id %>">Update this post</a>
 			<br/>
 			<img class="post-image" src="<%= post.image %>"  />
 			<br/>
+			<p class="post-description"> <%= post.description %> </p>
 			<span class="tag-container">
 				<% post.tags.forEach((tag) => { %>
 					<a class="post-tag" href="/search/<%= tag %>"><%= tag %></a>

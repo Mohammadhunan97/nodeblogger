@@ -19,8 +19,7 @@ Router.get('/signup',(req,res) => {
 
 Router.get('/dashboard',(req,res) => {
 	if(req.session.user){
-		Post.find({original_poster: req.session.user._id }).populate('original_poster','username').then((posts)=>{
-			console.log(posts)
+		Post.find({original_poster: req.session.user._id }).sort({date:-1}).populate('original_poster','username').then((posts)=>{
 			res.render('dashboard',{posts,})
 		});
 	}else{
@@ -45,7 +44,6 @@ Router.get('/search',(req,res) =>{
 
 Router.get('/search/:tag',(req,res) => {
 	Post.find({ tags: req.params.tag }).populate('original_poster','username').then((posts) => {
-		console.log(posts)
 		res.render('search',{posts,})
 	})
 })

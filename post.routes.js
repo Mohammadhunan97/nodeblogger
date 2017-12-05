@@ -19,7 +19,28 @@ Router.post('/new', (req,res) => {
 })
 
 
+Router.get('/remove/:id',(req,res) => {
+	if(req.session.user){
+		let errors = [];
 
+		Post.findOne({_id: req.params.id}).then((post)=>{
+			if(String(post.original_poster) === req.session.user._id){
+				post.remove();
+				res.redirect('/dashboard');
+			}else{
+				errors.push('you cannot delete a post that is not yours');
+				res.render('errorpage',{errors,});
+			}
+		}).catch((err)=>{
+			errors.push('something went wrong');
+			errors.push(JSON.stringify(err));
+			res.render('errorpage',{errors,});
+		})
+	}else{
+		res.redirect('/');
+	}
+
+})
 
 
 module.exports = Router;

@@ -33,6 +33,7 @@
 			<h2 class="post-title"> <%= post.title %> </h2>
 			<img class="post-image" src="<%= post.image %>"  />
 			<br/>
+			<p class="post-description"> <%= post.description %> </p>
 			<span class="tag-container">
 				<% post.tags.forEach((tag) => { %>
 					<a class="post-tag" href="/search/<%= tag %>"><%= tag %></a>
