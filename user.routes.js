@@ -91,6 +91,15 @@ Router.get('/following/remove/:username',(req,res) => {
 	})
 })
 
+Router.get('/logout',(req,res) =>{
+	if(req.session.user) {
+		req.session.user = null;
+		res.redirect('/');
+	}else{
+		res.redirect('/');
+	}
+})
+
 module.exports = Router;
 
 
