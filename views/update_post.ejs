@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="/style.css">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+	<link rel="stylesheet" href="/bootstrap-tags.css">
+	<style>
+		body{
+			width: 100vw!important;
+		}
+	</style>
+</head>
+<body>
+
+	<a href="/new_post/" class="nav-item">Make a New Post</a>
+	<a href="/dashboard/" class="nav-item">Dashboard</a>
+	<a href="/search/" class="nav-item">Search</a>
+	<a href="/user/profile/" class="nav-item">Profile</a>
+	<a href="/user/settings/" class="nav-item">Settings</a>
+
+	<br/>
+	<br/>
+
+	<h1> Update your post: </h1>
+
+	<form action="/post/update/<%= post._id %>" method="post">
+		<input name="title" placeholder="title"  value="<%= post.title %>" />
+		<br/>
+		<input name="image" placeholder="image link"  value="<%= post.image %>" />
+		<br/>
+		<textarea name="description" placeholder="your post description"> <%= post.description %> </textarea>
+		<br/>
+		<input name="tags" data-role="tagsinput" id="tags" placeholder="tag"  value="<%= post.tags %>">
+		<br/>
+		<input type="submit" />
+	</form>
+	<hr/>
+		<div class="post-container">
+			<h2 class="post-title"> <%= post.title %> </h2>
+			<p class="post-author"> Created By <a href="/user/profile/<%= post.original_poster.username %>"><%= post.original_poster.username %></a></p>
+			<img class="post-image" src="<%= post.image %>"  />
+			<br/>
+			<p class="post-description"> <%= post.description %> </p>
+			<span class="tag-container">
+				<% post.tags.forEach((tag) => { %>
+					<a class="post-tag" href="/search/<%= tag %>"><%= tag %></a>
+				<% }) %>
+			</span>
+		</div>
+
+
+
+	<script type="text/javascript" src="/jquery.js"></script>
+	<script type="text/javascript" src="/bootstrap-tags.js"></script>
+	<script type="text/javascript" src="/script.js"></script>
+</body>
+</html>
