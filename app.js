@@ -9,11 +9,11 @@ const express 	= require('express'),
 	postRoutes	= require('./post.routes'),
 	key			= require('./key'),
 	app 		= express(),
-	db 			= 'mongodb://localhost/computing4',
+	db 			= key.db.remote || 'mongodb://localhost/' + key.db.local,
 	port		= process.env.PORT || 3000;
 
 
-mongoose.connect('localhost','computing4');
+mongoose.connect(db);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: true
