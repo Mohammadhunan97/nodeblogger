@@ -10,7 +10,7 @@ const express 	= require('express'),
 	key			= require('./key'),
 	app 		= express(),
 	db 			= 'mongodb://localhost/computing4',
-	port		= 3000;
+	port		= process.env.PORT || 3000;
 
 
 mongoose.connect('localhost','computing4');
