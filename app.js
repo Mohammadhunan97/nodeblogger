@@ -11,7 +11,7 @@ const express 	= require('express'),
 	fbRoutes	= require('./routes/fb.routes'),
 	key			= require('./key'),
 	app 		= express(),
-	db 			= 'mongodb://localhost/' + key.db.local,
+	db 			= key.db.remote || 'mongodb://localhost/' + key.db.local,
 	port		= process.env.PORT || 3000;
 
 
