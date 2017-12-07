@@ -2,7 +2,7 @@
 	localhost:3000/<Route>
 */
 const Router = require('express').Router(),
-	User 	 = require('./model/user.model'),
+	User 	 = require('../model/user.model'),
 	bcrypt 	 = require('bcryptjs'),
 	salt 	 = bcrypt.genSaltSync(10);
 

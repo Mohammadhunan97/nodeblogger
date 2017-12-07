@@ -3,13 +3,15 @@ const express 	= require('express'),
 	bodyParser  = require('body-parser'),
 	session 	= require('express-session'),
 	ejs 		= require('ejs'),
-	baseRoutes	= require('./base.routes'),
-	userRoutes  = require('./user.routes'),
-	localRoutes = require('./local.routes'),
-	postRoutes	= require('./post.routes'),
+	passport	= require('passport'),
+	baseRoutes	= require('./routes/base.routes'),
+	userRoutes  = require('./routes/user.routes'),
+	localRoutes = require('./routes/local.routes'),
+	postRoutes	= require('./routes/post.routes'),
+	fbRoutes	= require('./routes/fb.routes'),
 	key			= require('./key'),
 	app 		= express(),
-	db 			= key.db.remote || 'mongodb://localhost/' + key.db.local,
+	db 			= 'mongodb://localhost/' + key.db.local,
 	port		= process.env.PORT || 3000;
 
 
@@ -21,10 +23,14 @@ app.use(bodyParser.urlencoded({
 app.use(session({ secret: key.session.secret }));
 app.use(express.static('public'));
 app.set('view engine','ejs');
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/',baseRoutes);
 app.use('/local',localRoutes);
 app.use('/post',postRoutes);
 app.use('/user',userRoutes);
+app.use('/auth/facebook',fbRoutes);
 
 
 app.listen(port,(err) => {
@@ -36,3 +42,4 @@ app.listen(port,(err) => {
 })
 
 
+// key.db.remote || 

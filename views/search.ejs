@@ -30,6 +30,8 @@
 			<p class="post-author"> Created By <a href="/user/profile/<%= post.original_poster.username %>"><%= post.original_poster.username %></a></p>
 			<img class="post-image" src="<%= post.image %>"  />
 			<br/>
+			<p> <%= post.description %>
+			<br/>
 			<span class="tag-container">
 				<% post.tags.forEach((tag) => { %>
 					<a class="post-tag" href="/search/<%= tag %>"><%= tag %></a>

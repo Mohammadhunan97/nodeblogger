@@ -3,6 +3,7 @@ const mongoose = require('mongoose'),
 	ObjectId   = Schema.Types.ObjectId;
 
 let UserSchema = new Schema({
+	email: String,
 	facebookid : String,
 	password   : String,
 	profile_pic: String,
@@ -21,5 +22,7 @@ let UserSchema = new Schema({
 
 
 module.exports = mongoose.model('User',UserSchema);
+
+
 
 
