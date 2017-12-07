@@ -1,10 +1,10 @@
  /* 
 	localhost:3000/user/<Route>
 */
-const Router = require('express').Router(),
-	User 	 = require('../model/user.model'),
-	Post 	 = require('../model/post.model');
-
+const Router   = require('express').Router(),
+	User 	   = require('../model/user.model'),
+	Post 	   = require('../model/post.model');
+	
 Router.get('/profile', (req,res) => {
 	if(req.session.user){
 		res.redirect('/user/profile/'+req.session.user.username);

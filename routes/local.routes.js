@@ -4,7 +4,28 @@
 const Router = require('express').Router(),
 	User 	 = require('../model/user.model'),
 	bcrypt 	 = require('bcryptjs'),
-	salt 	 = bcrypt.genSaltSync(10);
+	salt 	 = bcrypt.genSaltSync(10),
+	nodemailer = require('nodemailer'),
+	key = require('../key');
+
+
+
+// var client = nodemailer.createTransport({
+//   service: 'gmail',
+//   auth: {
+//     user: 'mohammadhunan@gmail.com',
+//     pass: 'Lidsfitteds1'
+//   }
+// });
+
+var client = nodemailer.createTransport({
+  service: 'SendGrid',
+  auth: {
+    user: key.sendGrid.username,
+    pass: key.sendGrid.password
+  }
+});
+
 
 Router.post('/login',(req,res) => {
 	let errors = [];
@@ -30,9 +51,11 @@ Router.post('/signup',(req,res) => {
 	let usernameAlreadyChosen = false;
 	let usernameIsGood = req.body.username.length > 0;
 	let passwordIsGood = req.body.password.length > 0;
+	let emailIsGood = req.body.email.length > 0;
 
 	if(!usernameIsGood) errors.push('username field must be filled');
 	if(!passwordIsGood) errors.push('password field must be filled');
+	if(!emailIsGood) errors.push('email field must be filled');
 
 	User.findOne({ username: req.body.username }).then((user) => {
 		if(user){
@@ -48,6 +71,7 @@ Router.post('/signup',(req,res) => {
 
 			let newuser = new User;
 			newuser.username = req.body.username;
+			newuser.email = req.body.email;
 			newuser.password = bcrypt.hashSync(req.body.password,salt);
 			newuser.profile_pic = req.body.profile_pic;
 			newuser.followers.push(req.body.username);
@@ -55,6 +79,24 @@ Router.post('/signup',(req,res) => {
 
 			newuser.save((user) =>{
 				req.session.user = user;
+
+			let email = {
+			  from: key.sendGrid.username,
+			  to: newuser.email,
+			  subject: 'Welcome to Node Blogger',
+			  text: 'Thank you for signing up with node blogger',
+			  html: '<h2>Welcome to Node Blogger</h2><br/><p>Thank you for signing up with node blogger</p>'
+			};
+			client.sendMail(email, function(err, info){
+			    if (err ){
+			      console.log(err);
+			    }
+			    else {
+			      console.log('Message sent: ' + info.response);
+			    }
+			});
+
+
 				res.redirect('/dashboard');
 			});
 		}

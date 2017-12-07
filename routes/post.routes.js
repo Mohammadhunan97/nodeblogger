@@ -136,9 +136,6 @@ Router.post('/update/:id',(req,res) => {
 		let errors = [];
 		Post.findOne({_id: req.params.id}).then((post)=>{
 
-			console.log('String(post.original_poster) === req.user_id',String(post.original_poster) === req.user._id)
-			console.log('String(post.original_poster) == req.user_id',String(post.original_poster) == req.user._id)
-
 			if(String(req.user._id) == post.original_poster){
 				post.title = req.body.title || post.title;
 				post.description = req.body.description || post.description;

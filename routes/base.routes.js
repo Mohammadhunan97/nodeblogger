@@ -5,6 +5,7 @@ const Router = require('express').Router(),
 	User 	 = require('../model/user.model'),
 	Post 	 = require('../model/post.model');
 
+
 Router.get('/',(req,res) => {
 	if(req.session.user || req.user) {
 		res.redirect('/dashboard');
