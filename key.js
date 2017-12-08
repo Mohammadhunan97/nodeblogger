@@ -8,7 +8,7 @@ module.exports = {
 	},
 	db: {
 		local: 'computing6',
-		remote: 'mongodb://heroku_kpfmrq31:3g7f00e92n87mhtnjbt4qt3nr1@ds131826.mlab.com:31826/heroku_kpfmrq31'
+		remote: 'mongodb://heroku_jbn5vsw8:2ikt38il1cjmjjoch9mpffqag5@ds033196.mlab.com:33196/heroku_jbn5vsw8'
 	},
 	sendGrid: {
 		username: 'app82398077@heroku.com',
